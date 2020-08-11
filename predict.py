@@ -11,22 +11,11 @@ from utils.unet_residual import UNetR as Model
 from utils.psnr import PSNRMetric
 
 os.environ["CUDA_VISIBLE_DEVICES"] = sys.argv[1]
-experiment_id = sys.argv[2]
 
 if len(sys.argv) <= 3:
-    saved_weights_paths = [os.path.join("saver",experiment_id,"final")]
+    saved_weights_paths = [os.path.join("saver","final")]
 else:
-    saved_weights_paths = sys.argv[3:]
-
-def load_trained_npy_weights(model,pretrained_weights_path):
-    pretrained_weights = np.load(pretrained_weights_path,allow_pickle=True)
-    weights = []
-    for single_variable in model.variables:
-        #print(f"{single_variable.name} shape:{single_variable.shape}--{pretrained_weights[single_variable.name].shape}")
-        weights.append( pretrained_weights[single_variable.name] )
- 
-    model.set_weights(weights)
-    print(f"load trained npy weights from {pretrained_weights_path}")
+    saved_weights_paths = sys.argv[2:]
 
 def predict():
     config = {
@@ -60,10 +49,7 @@ def predict():
     for single_saved_weights_path in config["saved_weights_paths"]:
         # load weights
         print(f"load weights from {single_saved_weights_path}")
-        if single_saved_weights_path.endswith("npy") or single_saved_weights_path.endswith("npz"):
-            load_trained_npy_weights(model,single_saved_weights_path)
-        else:
-            model.load_weights(single_saved_weights_path)
+        model.load_weights(single_saved_weights_path)
 
         metric.reset_states()
         for index,example in enumerate(test_dataset):

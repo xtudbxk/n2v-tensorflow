@@ -10,29 +10,20 @@ from utils.dataset import BSD68
 from utils.unet_residual import UNetR as Model
 
 os.environ["CUDA_VISIBLE_DEVICES"] = sys.argv[1]
-experiment_id = sys.argv[2]
-
-if os.path.exists(os.path.join("saver",experiment_id)) is False:
-    os.mkdir(os.path.join("saver",experiment_id))
 
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
 def train():
     config = {
-            "lr":4e-4,
+            "lr":1e-2,
             "momentum":0.9,
-            "epoches":200,
+            "epoches":3000,
             "accum_iters":1,
             "init_model_path":None,
 
             "batch_size": 128,
             "example_count":-1,
             "input_size":(180,180), #(w,h)
-
-            "loss_interval":10,
-            "image_interval":30,
-            "metric_interval":60,
-            "save_interval":50, # epoch interval
 
             "unet_depth":3,
             "unet_filter_num":96,
@@ -45,10 +36,6 @@ def train():
         config["epoches"] = 10
         config["batch_size"] = 2
         config["example_count"] = 10
-        config["loss_interval"] = 5
-        config["image_interval"] = 5
-        config["metric_interval"] = 10
-        config["save_interval"] = 4
 
     # load dataset
     bsd68 = BSD68(div_factor=2**(config["unet_depth"]-1))
@@ -96,7 +83,7 @@ def train():
             iteration_index += 1
 
     # save model
-    model.save_weights(filepath=os.path.join("saver",experiment_id,"final"))
+    model.save_weights(filepath=os.path.join("saver","final"))
     end_time = datetime.datetime.now()
     training_time = end_time - start_time
     print(f"the end of the train:{training_time.days}d{training_time.seconds//3600}h{training_time.seconds%3600//60}m{training_time.seconds%60}s")
