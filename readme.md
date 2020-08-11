@@ -1,6 +1,6 @@
 ### Introduction
 
-This is a project which just move the [N2V](https://github.com/juglab/n2v) to tensorflow. The N2V is referring to the approach for image denoising in the paper ["Noise2Void - Learning Denoising from Single Noisy Images"](https://arxiv.org/abs/1811.10980). And here, I just use the tensorflow to implement the approach.
+This is a project which just move the official project [N2V](https://github.com/juglab/n2v) to tensorflow. The N2V is referring to the approach for image denoising in the paper ["Noise2Void - Learning Denoising from Single Noisy Images"](https://arxiv.org/abs/1811.10980).
 
 ### Preparation
 for using this code, you have to do something else:
