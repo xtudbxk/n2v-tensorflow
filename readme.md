@@ -1,6 +1,6 @@
 ### Introduction
 
-This is a project which just move the official project [N2V](https://github.com/juglab/n2v) to tensorflow. The N2V is referring to the approach for image denoising in the paper ["Noise2Void - Learning Denoising from Single Noisy Images"](https://arxiv.org/abs/1811.10980).
+This is a project which just move the official project [N2V](https://github.com/juglab/n2v) to tensorflow. The N2V is referring to the approach for image denoising in the paper ["Noise2Void - Learning Denoising from Single Noisy Images"](https://arxiv.org/abs/1811.10980). Please cite them if you think this project can help you.
 
 ### Preparation
 for using this code, you have to do something else:
@@ -23,4 +23,4 @@ then, you just input the following sentence to train it.
 > python predict.py <gpu_id> saved_weight_path
 
 ### Result
-final psnr on BSD68 is 27.91 dB while it is 27.71 dB.
+final psnr on BSD68 is 27.91 dB while it is 27.71 dB in the paper.
