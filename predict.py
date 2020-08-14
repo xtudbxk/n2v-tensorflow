@@ -57,6 +57,7 @@ def predict():
             x,y = example
             y_ = model.predict(x)
             y_ = bsd68.postprocess(y_,target_size=(y.shape[2],y.shape[1]))
+            y_ = np.clip(y_,0,255)
             metric.update_state(y,y_)
 
         psnr = metric.result().numpy()
