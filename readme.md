@@ -23,4 +23,4 @@ then, you just input the following sentence to train it.
 > python predict.py <gpu_id> saved_weight_path
 
 ### Result
-final psnr on BSD68 is 27.55 dB while it is 27.71 dB.
+final psnr on BSD68 is 27.91 dB while it is 27.71 dB.
